@@ -1,0 +1,16 @@
+[Unit]
+Description=Language Tool Java Server Linux systemd service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=%i
+Group=%i
+ExecStart=/usr/bin/java -cp ${HOME}/.local/bin/languagetool/languagetool-server.jar org.languagetool.server.HTTPServer --port 8081 --allow-origin
+
+
+[Install]
+WantedBy=multi-user.target
