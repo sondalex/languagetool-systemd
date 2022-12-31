@@ -32,12 +32,26 @@ user@desktop:~/Downloads/languagetool-systemd$ sudo cp langtoolsysd.service /etc
 **Note** replace <your username> with the username of your current bash session.
 If you do not know: run `whoami` in your shell.
 
+Reload the daemon for systemctl to trace the newly added service file
+
+
+```console
+user@desktop:~/Downloads/languagetool-systemd$ sudo systemctl daemon-reload
+```
 
 Enable the service
 
 ```console
-user@desktop:~/Downloads/languagetool-systemd$ sudo systemctl enable langtoolsysd@<your username>.service
+user@desktop:~/Downloads/languagetool-systemd$ sudo systemctl enable langtoolsysd@<your username>
 ```
+
+Test the server:
+
+```console
+user@desktop:~/Downloads/languagetool-systemd$ curl -d "language=en-US" -d "text=A bit of text" http://localhost:8081/v2/check && echo "\n"
+```
+
+Normally JSON output should be returned. 
 
 ### Disabling/Stopping the service
 
@@ -45,13 +59,13 @@ If you wish to stop the service, for instance because you run a intensive script
 
 
 ```console
-user@desktop~$ sudo systemctl stop langtoolsysd@<your username>.service
+user@desktop~$ sudo systemctl stop langtoolsysd@<your username>
 ```
 
 If you wish to stop the service definitely, disable the service:
 
 
 ```console
-user@desktop~$ sudo systemctl disable langtoolsysd@<your username>.service
+user@desktop~$ sudo systemctl disable langtoolsysd@<your username>
 ```
 
